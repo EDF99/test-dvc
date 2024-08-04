@@ -1,0 +1,6 @@
+outs:
+- md5: ce20f67586e996bb425184db0529ff8d.dir
+  size: 980413917
+  nfiles: 11
+  hash: md5
+  path: chimi-text-model

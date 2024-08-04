@@ -1,0 +1,6 @@
+outs:
+- md5: a2ca8ba1f6589e3fc0917596b4382e4c.dir
+  size: 978096281
+  nfiles: 6
+  hash: md5
+  path: base-spa-mt5
