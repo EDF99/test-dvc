@@ -1,0 +1,6 @@
+outs:
+- md5: f4046e56ed0ce708b19aa5c1baff2aef.dir
+  size: 627997
+  nfiles: 3
+  hash: md5
+  path: chimi_synthetic_dataset
