@@ -1,2 +1,4 @@
 base:
   seed: 42
+data_load:
+  csv_dataset: "datasets/raw/chimi_text_dataset.csv"
