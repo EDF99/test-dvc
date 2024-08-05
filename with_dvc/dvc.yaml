@@ -1,0 +1,5 @@
+artifacts:
+  chimi-text-base:
+    path: models/chimi-text-model
+    type: model
+    desc: "Modelo de TEXTO a INTENT"
