@@ -1,3 +1,5 @@
 venv
 *.csv
 wo_dvc/models
+*.pyc
+with_dvc/datasets/preprocessed

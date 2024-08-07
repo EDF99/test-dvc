@@ -3,6 +3,9 @@ import pandas as pd
 import numpy as np
 import evaluate
 
+cer = evaluate.load("cer", module_type="metric")
+exact_match = evaluate.load("exact_match", module_type="metric")
+
 def custom_eval(predictions, references):
     agregar_contacto_len = 0
     transferencia_len = 0
@@ -69,17 +72,17 @@ def custom_eval(predictions, references):
 
     return result
 
-def compute_metrics_with_csv_building(save_to_csv=False, csv_path=None):
+def compute_metrics_with_csv_building(tokenizer, save_to_csv=False, csv_path=None):
     def compute_metrics(eval_pred):
         predictions, labels, inputs = eval_pred
-        decoded_preds = model_tokenizer.batch_decode(predictions, skip_special_tokens=True)
+        decoded_preds = tokenizer.batch_decode(predictions, skip_special_tokens=True)
 
         # Replace -100 in the labels as we can't decode them.
-        labels = np.where(labels != -100, labels, model_tokenizer.pad_token_id)
-        decoded_labels = model_tokenizer.batch_decode(labels, skip_special_tokens=True)
+        labels = np.where(labels != -100, labels, tokenizer.pad_token_id)
+        decoded_labels = tokenizer.batch_decode(labels, skip_special_tokens=True)
 
-        inputs = np.where(inputs != -100, inputs, model_tokenizer.pad_token_id)
-        decoded_inputs = model_tokenizer.batch_decode(inputs, skip_special_tokens=True)
+        inputs = np.where(inputs != -100, inputs, tokenizer.pad_token_id)
+        decoded_inputs = tokenizer.batch_decode(inputs, skip_special_tokens=True)
 
         result = {}
 
@@ -104,14 +107,3 @@ def compute_metrics_with_csv_building(save_to_csv=False, csv_path=None):
 
         return {k: round(v, 4) for k, v in result.items()}
     return compute_metrics
-
-cer = evaluate.load("cer", module_type="metric")
-exact_match = evaluate.load("exact_match", module_type="metric")
-
-modelo_base_path = "../models/base-spa-mt5"
-
-model_tokenizer = MT5Tokenizer.from_pretrained(modelo_base_path, legacy=False)
-
-base_model = MT5ForConditionalGeneration.from_pretrained(modelo_base_path)
-
-data_collator = DataCollatorForSeq2Seq(tokenizer=model_tokenizer, model=base_model)

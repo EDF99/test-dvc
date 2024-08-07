@@ -1,5 +1,5 @@
 outs:
-- md5: de00e544b545a523b74bea6b60f34aee
-  size: 625217
+- md5: 94aee0544032aa63f0b5a10613ba6ec7
+  size: 124677
   hash: md5
   path: chimi_text_dataset.csv
