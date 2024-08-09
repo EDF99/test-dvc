@@ -9,5 +9,6 @@ train:
   epochs: 1
   batch_size: 4
   trained_model_path: "models/chimi-text-model"
+  reports_path: reports/train
 evaluate:
-  metrics_path: "reports/metrics.json"
+  metrics_path: "reports/eval/metrics.json"

@@ -19,7 +19,8 @@ def evaluate_trained_model(config_path: str) -> None:
         per_device_eval_batch_size=config["train"]["batch_size"],
         include_inputs_for_metrics=True,
         predict_with_generate=True,
-        metric_for_best_model="exact_match"
+        metric_for_best_model="exact_match",
+        report_to="none"
     )
     compute_metrics_func = compute_metrics_with_csv_building(trained_tokenizer)
     evaluate_trainer = Seq2SeqTrainer(

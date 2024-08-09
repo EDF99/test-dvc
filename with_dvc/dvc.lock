@@ -41,8 +41,8 @@ stages:
       nfiles: 6
     - path: src/train.py
       hash: md5
-      md5: 1cb0fadb4408abf98a4eb04f2bd467ae
-      size: 2970
+      md5: 1be0d4920642e7776f5d1855273a1c37
+      size: 3302
     params:
       params.yaml:
         base:
@@ -56,12 +56,18 @@ stages:
           epochs: 1
           batch_size: 4
           trained_model_path: models/chimi-text-model
+          reports_path: reports/train
     outs:
     - path: models/chimi-text-model
       hash: md5
-      md5: 6e679d273a00daea9bce815ad4ac1471.dir
-      size: 978042823
+      md5: d837ff39a9195f398b8e8569101d7514.dir
+      size: 978042801
       nfiles: 7
+    - path: reports/train
+      hash: md5
+      md5: e522381f5c09b270de74bac32b1f6eb8.dir
+      size: 978047388
+      nfiles: 32
   evaluate_model:
     cmd: python src/eval.py --config=params.yaml
     deps:
@@ -72,13 +78,13 @@ stages:
       nfiles: 10
     - path: models/chimi-text-model
       hash: md5
-      md5: 6e679d273a00daea9bce815ad4ac1471.dir
-      size: 978042823
+      md5: d837ff39a9195f398b8e8569101d7514.dir
+      size: 978042801
       nfiles: 7
     - path: src/eval.py
       hash: md5
-      md5: 980d8cea51925c5b39983fc108fc611a
-      size: 1836
+      md5: 4835281ee24d45c450febaa410ee5252
+      size: 1862
     params:
       params.yaml:
         base:
@@ -92,8 +98,9 @@ stages:
           epochs: 1
           batch_size: 4
           trained_model_path: models/chimi-text-model
+          reports_path: reports/train
     outs:
-    - path: reports/metrics.json
+    - path: reports/eval/metrics.json
       hash: md5
-      md5: fff29778058826692d78528d79c885e3
-      size: 410
+      md5: 83c83a21394a32c4001080904c839524
+      size: 412

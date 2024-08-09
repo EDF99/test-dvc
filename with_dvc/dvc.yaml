@@ -20,6 +20,7 @@ stages:
       - data
       - train
     outs:
+      - reports/train
       - models/chimi-text-model
   evaluate_model:
     cmd: python src/eval.py --config=params.yaml
@@ -32,5 +33,16 @@ stages:
       - data
       - train
     metrics:
-      - reports/metrics.json:
+      - reports/eval/metrics.json:
           cache: false
+params:
+  - reports/train/params.yaml
+metrics:
+  - reports/train/metrics.json
+plots:
+  - reports/train/plots/metrics:
+      x: step
+artifacts:
+  best:
+    path: reports/train/artifacts/best
+    type: model
