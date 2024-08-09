@@ -1,5 +1,36 @@
-artifacts:
-  chimi-text-base:
-    path: models/chimi-text-model
-    type: model
-    desc: "Modelo de TEXTO a INTENT"
+stages:
+  preprocess_data:
+    cmd: python src/preprocess.py --config=params.yaml
+    deps:
+      - datasets/raw/chimi_text_dataset.csv
+      - src/preprocess.py
+    params:
+      - base
+      - data
+    outs:
+      - datasets/preprocessed/preprocessed_chimi_text_dataset
+  train_model:
+    cmd: python src/train.py --config=params.yaml
+    deps:
+      - models/base-spa-mt5
+      - datasets/preprocessed/preprocessed_chimi_text_dataset
+      - src/train.py
+    params:
+      - base
+      - data
+      - train
+    outs:
+      - models/chimi-text-model
+  evaluate_model:
+    cmd: python src/eval.py --config=params.yaml
+    deps:
+      - models/chimi-text-model
+      - datasets/preprocessed/preprocessed_chimi_text_dataset
+      - src/eval.py
+    params:
+      - base
+      - data
+      - train
+    metrics:
+      - reports/metrics.json:
+          cache: false

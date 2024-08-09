@@ -3,6 +3,7 @@ import argparse
 from transformers import Seq2SeqTrainer, Seq2SeqTrainingArguments, MT5ForConditionalGeneration, DataCollatorForSeq2Seq, MT5Tokenizer
 from datasets import load_from_disk
 from common import compute_metrics_with_csv_building
+import json
 
 def evaluate_trained_model(config_path: str) -> None:
     with open(config_path) as conf_file:
@@ -31,6 +32,8 @@ def evaluate_trained_model(config_path: str) -> None:
     )
     result = evaluate_trainer.evaluate()
     print(result)
+    with open(config["evaluate"]["metrics_path"], 'w') as fp:
+        json.dump(result, fp)
 
 
 if __name__ == "__main__":
