@@ -1,6 +1,6 @@
 outs:
-- md5: 8eaea21b94d7afff50b96ce01bbe0425.dir
-  size: 980413922
-  nfiles: 11
+- md5: 6e679d273a00daea9bce815ad4ac1471.dir
+  size: 978042823
+  nfiles: 7
   hash: md5
   path: chimi-text-model
