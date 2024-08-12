@@ -6,8 +6,8 @@ data:
   preprocessed_dataset: "datasets/preprocessed/preprocessed_chimi_text_dataset"
   validation_and_test_size: 0.1
 train:
-  epochs: 1
-  batch_size: 4
+  epochs: 2
+  batch_size: 8
   trained_model_path: "models/chimi-text-model"
   reports_path: reports/train
 evaluate:

@@ -53,20 +53,20 @@ stages:
           preprocessed_dataset: datasets/preprocessed/preprocessed_chimi_text_dataset
           validation_and_test_size: 0.1
         train:
-          epochs: 1
-          batch_size: 4
+          epochs: 2
+          batch_size: 8
           trained_model_path: models/chimi-text-model
           reports_path: reports/train
     outs:
     - path: models/chimi-text-model
       hash: md5
-      md5: d837ff39a9195f398b8e8569101d7514.dir
+      md5: fc47bf62bb529d3e9c52429636c3df11.dir
       size: 978042801
       nfiles: 7
     - path: reports/train
       hash: md5
-      md5: e522381f5c09b270de74bac32b1f6eb8.dir
-      size: 978047388
+      md5: 3ff0b49ab0151ac7a7fef47802bc4dc5.dir
+      size: 978047580
       nfiles: 32
   evaluate_model:
     cmd: python src/eval.py --config=params.yaml
@@ -78,7 +78,7 @@ stages:
       nfiles: 10
     - path: models/chimi-text-model
       hash: md5
-      md5: d837ff39a9195f398b8e8569101d7514.dir
+      md5: fc47bf62bb529d3e9c52429636c3df11.dir
       size: 978042801
       nfiles: 7
     - path: src/eval.py
@@ -95,12 +95,12 @@ stages:
           preprocessed_dataset: datasets/preprocessed/preprocessed_chimi_text_dataset
           validation_and_test_size: 0.1
         train:
-          epochs: 1
-          batch_size: 4
+          epochs: 2
+          batch_size: 8
           trained_model_path: models/chimi-text-model
           reports_path: reports/train
     outs:
     - path: reports/eval/metrics.json
       hash: md5
-      md5: 83c83a21394a32c4001080904c839524
-      size: 412
+      md5: 993a7c0b8b4489c75d04e41d36531915
+      size: 411
