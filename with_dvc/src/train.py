@@ -7,6 +7,8 @@ from common import compute_metrics_with_csv_building
 from pynvml import *
 from transformers.integrations import DVCLiveCallback
 from dvclive import Live
+import shutil
+import os
 
 os.environ["HF_DVCLIVE_LOG_MODEL"] = "true"
 
@@ -33,9 +35,10 @@ def train_model(config_path: str) -> None:
     generation_config = GenerationConfig.from_model_config(base_model.config)
     generation_config.max_length = 100
     base_model.generation_config = generation_config
+    checkpoints_tmp_folder = "models/checkpoints"
 
     training_args = Seq2SeqTrainingArguments(
-        output_dir="models/checkpoints",
+        output_dir=checkpoints_tmp_folder,
         overwrite_output_dir=True,
         eval_strategy="epoch",
         logging_strategy="epoch",
@@ -79,6 +82,10 @@ def train_model(config_path: str) -> None:
     result = trainer.train()
     print_training_summary(result)
     trainer.save_model(config["train"]["trained_model_path"])
+
+    if os.path.exists(checkpoints_tmp_folder):
+        shutil.rmtree(checkpoints_tmp_folder)
+
     print("\nTraining has finished...")
 
 if __name__ == "__main__":
