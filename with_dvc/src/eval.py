@@ -4,6 +4,7 @@ from transformers import Seq2SeqTrainer, Seq2SeqTrainingArguments, MT5ForConditi
 from datasets import load_from_disk
 from common import compute_metrics_with_csv_building
 import json
+import os
 
 def evaluate_trained_model(config_path: str) -> None:
     with open(config_path) as conf_file:
@@ -33,6 +34,8 @@ def evaluate_trained_model(config_path: str) -> None:
     )
     result = evaluate_trainer.evaluate()
     print(result)
+    metrics_dir = os.path.dirname(config["evaluate"]["metrics_path"])
+    os.makedirs(metrics_dir, exist_ok=True)
     with open(config["evaluate"]["metrics_path"], 'w') as fp:
         json.dump(result, fp)
 

@@ -10,7 +10,7 @@ from dvclive import Live
 import shutil
 import os
 
-os.environ["HF_DVCLIVE_LOG_MODEL"] = "true"
+os.environ["HF_DVCLIVE_LOG_MODEL"] = "false"
 
 def print_gpu_utilization():
     nvmlInit()
@@ -65,7 +65,7 @@ def train_model(config_path: str) -> None:
         warmup_init=False,
     )
 
-    live = Live(config["train"]["reports_path"])
+    live = Live(config["train"]["reports_path"], dvcyaml=False)
     compute_metrics_func = compute_metrics_with_csv_building(tokenizer)
     trainer = Seq2SeqTrainer(
         model=base_model,

@@ -23,7 +23,7 @@ stages:
     outs:
     - path: datasets/preprocessed/preprocessed_chimi_text_dataset
       hash: md5
-      md5: 33797bda27bf3fe480551cb1bdee1790.dir
+      md5: 232712d99f1c3237d4e740735ae4b13a.dir
       size: 460215
       nfiles: 10
   train_model:
@@ -31,7 +31,7 @@ stages:
     deps:
     - path: datasets/preprocessed/preprocessed_chimi_text_dataset
       hash: md5
-      md5: 33797bda27bf3fe480551cb1bdee1790.dir
+      md5: 232712d99f1c3237d4e740735ae4b13a.dir
       size: 460215
       nfiles: 10
     - path: models/base-spa-mt5
@@ -41,8 +41,8 @@ stages:
       nfiles: 6
     - path: src/train.py
       hash: md5
-      md5: 1be0d4920642e7776f5d1855273a1c37
-      size: 3302
+      md5: 28a687a1a9d43fb2962b325a74a0c89e
+      size: 3489
     params:
       params.yaml:
         base:
@@ -60,31 +60,35 @@ stages:
     outs:
     - path: models/chimi-text-model
       hash: md5
-      md5: fc47bf62bb529d3e9c52429636c3df11.dir
+      md5: 88128b806447640d2e4163b2356fb2ce.dir
       size: 978042801
       nfiles: 7
-    - path: reports/train
+    - path: reports/train/metrics.json
       hash: md5
-      md5: 3ff0b49ab0151ac7a7fef47802bc4dc5.dir
-      size: 978047580
-      nfiles: 32
+      md5: ba34de5c5d24f2622e3aa6af52215c37
+      size: 753
+    - path: reports/train/plots/metrics
+      hash: md5
+      md5: 5b7754ee51343746742b8ef2ab034359.dir
+      size: 807
+      nfiles: 23
   evaluate_model:
     cmd: python src/eval.py --config=params.yaml
     deps:
     - path: datasets/preprocessed/preprocessed_chimi_text_dataset
       hash: md5
-      md5: 33797bda27bf3fe480551cb1bdee1790.dir
+      md5: 232712d99f1c3237d4e740735ae4b13a.dir
       size: 460215
       nfiles: 10
     - path: models/chimi-text-model
       hash: md5
-      md5: fc47bf62bb529d3e9c52429636c3df11.dir
+      md5: 88128b806447640d2e4163b2356fb2ce.dir
       size: 978042801
       nfiles: 7
     - path: src/eval.py
       hash: md5
-      md5: 4835281ee24d45c450febaa410ee5252
-      size: 1862
+      md5: 89be1d8ca18db1a6b24fb465796a74b8
+      size: 1986
     params:
       params.yaml:
         base:
@@ -102,5 +106,5 @@ stages:
     outs:
     - path: reports/eval/metrics.json
       hash: md5
-      md5: 993a7c0b8b4489c75d04e41d36531915
-      size: 411
+      md5: 4c9e281699ef791fab36090c1e4148b9
+      size: 412
